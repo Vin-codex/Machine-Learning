@@ -20,20 +20,20 @@ client.on('ready', () => {
 });
 
 client.on('message', async msg => {
-    console.log('Pesan Diterima: ', msg.body);
-    if (msg.body.toLowerCase().includes('halo') || msg.body.toLowerCase().includes('hallo')) {
-        msg.reply('Halo Kak! Ada yang bisa Kakak tanyakan mengenai program Microcredential Bisnis Digital, Inovasi, dan Kewirausahaan?');
-    } else if (msg.body.startsWith('!tanya ')) {
+    console.log('Message Received: ', msg.body);
+    if (msg.body.toLowerCase().includes('hello') || msg.body.toLowerCase().includes('halo') || msg.body.toLowerCase().includes('hi')) {
+        msg.reply('Hi There! Is there anything I can help you with today?');
+    } else if (msg.body.startsWith('!Snap ')) {
         const query = msg.body.slice(7);
 
         // Prompt
         const prompt = `
-        Kamu adalah customer service program Microcredential Bisnis Digital, Inovasi, dan Kewirausahaan. 
-        Kamu menjawab dalam 1 paragraf dengan bahasa Indonesia yang sopan dan ramah tanpa emoticon. 
-        Jangan jawab hal yang tidak kamu ketahui, dan arahkan ke team@microcredential.id jika diperlukan.
+        You are a human resource admin in a company called TestCompany, which works in the field of IT solution.
+        You answer in 1 paragraph with proper English grammar.
+        Don't answer things that you don't know, redirect the customer to email the HR department hr.admin@testcompany.id for more information.
 
-        Pertanyaan: ${query}
-        Jawaban:
+        Question: ${query}
+        Answer:
         `;
 
         try {
@@ -42,17 +42,17 @@ client.on('message', async msg => {
             const response = await result.response;
             const text = response.text();
 
-            msg.reply(`*Customer Service AI*\n${text}`);
+            msg.reply(`${text}`);
         } catch (error) {
             console.error('Error with Gemini API:', error);
-            msg.reply('Maaf Kak, terjadi kesalahan. Silakan coba lagi atau hubungi team@microcredential.id.');
+            msg.reply('Sorry for the inconvinience, we are currently unable to answer your questions. Please contact hr.admin@testcompany.id');
         }
-    } else if (msg.body.toLowerCase().includes('!batasan')) {
-        msg.reply('Mohon maaf Kak, saya hanya bisa menjawab terkait program Microcredential. Untuk kendala lain, silakan hubungi team@microcredential.id.');
-    } else if (msg.body.toLowerCase().includes('!rekomendasi')) {
-        msg.reply('Kakak ingin mengambil mata kuliah untuk profesi apa? Dan berapa jumlah maksimal mata kuliah yang bisa diambil?');
+    } else if (msg.body.toLowerCase().includes('!limit')) {
+        msg.reply('Sorry, I am only able to answer questions regarding Human Resource problem. Please contact hr.admin@testcompany.id for more information');
+    } else if (msg.body.toLowerCase().includes('!recommendation')) {
+        msg.reply('You may ask me questions regarding Reimbursement, Leave, and etc. So which topic may I help you with today?');
     } else {
-        msg.reply('Halo Kak! Mohon gunakan perintah `!tanya [pertanyaan]` untuk bertanya, atau `!batasan` untuk batasan layanan saya.');
+        msg.reply('Hi! Please use the `!Snap [question]` command to ask, or `!limit` to see my service limitations.');
     }
 });
 
